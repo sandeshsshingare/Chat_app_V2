@@ -1,4 +1,5 @@
 import { Component } from '@angular/core';
+import { Router } from '@angular/router';
 import { AuthService } from 'src/app/services/auth.service';
 
 @Component({
@@ -8,12 +9,14 @@ import { AuthService } from 'src/app/services/auth.service';
 })
 export class LoginComponent {
 
-constructor(private authService:AuthService){}
+constructor(private authService:AuthService,private router: Router){}
 
   login(data:any){
     this.authService.login(data).subscribe({
-      next:(data)=>{
+      next:(data:any)=>{
         alert('login successfull');
+        localStorage.setItem('chatUserToken', data.token)
+        this.router.navigate(['/home/chats'])
       }
     })
   }

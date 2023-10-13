@@ -1,0 +1,51 @@
+
+<div class="mx-auto max-w-7xl sm:px-6 lg:px-8 mt-10">
+    <div class="flex justify-between px-5">
+     <p class="text-2xl border-b-2">{{userDetails?.name}}</p>   
+     <button class="bg-red-600 p-2 mb-2 rounded-xl text-white hover:bg-red-400"  (click)="logout()">Logout</button>
+    </div>
+    <div class="grid grid-cols-4 gap-3 " >
+        <div class="">
+            <div>
+                <h4 class="text-black text-2xl">Users</h4>
+            </div>
+            <div *ngFor="let user of usersList; let index=index" class="border-b-2 border-gray-500 py-3 cursor-pointer"  (click)="getAllMessages(user)" >
+                
+             <span class="shadow-lg" > {{user?.name}}</span>   
+            </div>
+        </div>
+        <div class="col-span-3 ">
+            <div class="text-center bg-slate-400 rounded-2xl">
+                <h4 class="text-black text-2xl p-3">{{selectedUser?.name}}</h4>
+            </div>
+            <div style="height: 500px;overflow: auto;" #scroll >
+
+                <div *ngFor="let message of messages; let index=index" class=" py-3 cursor-pointer "  >
+                    <div [ngClass]="{' flex  justify-end': message.from === userDetails._id}" class="mx-5">
+                        <div class="shadow-sm shadow-black p-3 mb-3 rounded-lg inline-block    w-96 break-words"  >
+                            <p class="">
+
+                                <span class=""  > {{message?.message }}</span>  
+                                <br>
+                                <span class="float-right flex align-middle gap-2">  <small>  {{ message?.createdAt | date : "h:mm a " }} </small>
+
+                                    <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-check2-all" viewBox="0 0 16 16">
+                                        <path d="M12.354 4.354a.5.5 0 0 0-.708-.708L5 10.293 1.854 7.146a.5.5 0 1 0-.708.708l3.5 3.5a.5.5 0 0 0 .708 0l7-7zm-4.208 7-.896-.897.707-.707.543.543 6.646-6.647a.5.5 0 0 1 .708.708l-7 7a.5.5 0 0 1-.708 0z"/>
+                                        <path d="m5.354 7.146.896.897-.707.707-.897-.896a.5.5 0 1 1 .708-.708z"/>
+                                      </svg>
+
+                                </span>
+                            </p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="text-end me-5 my-5">
+
+                <input type="text" class="p-2 me-5 rounded-lg border-red-700 border-2 my-10 mx-10" placeholder="Write message here..." #msg >
+                <button class="border p-3 bg-green-800 rounded-lg hover:bg-green-700" (click)="sendMessage(msg)">Send msg</button>
+            </div>
+        </div>
+    </div>
+  </div>
+  

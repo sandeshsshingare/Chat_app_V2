@@ -59,4 +59,4 @@ const register =asyncErrorHandler(async (req,res,next)=>{
 })
 
 
-module.exports = {login, register}
+module.exports = {login, register,verifyToken}

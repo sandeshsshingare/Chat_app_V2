@@ -21,8 +21,10 @@ export class RegisterComponent {
     }
 
     this.authService.register(data).subscribe({
-      next:(data)=>{
+      next:(data:any)=>{
         alert("user registration successfull")
+        localStorage.setItem('chatUserToken', data.token)
+
       }
     })
 

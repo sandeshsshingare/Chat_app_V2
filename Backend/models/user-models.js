@@ -13,9 +13,13 @@ const userSchema = mongoose.Schema({
         password:{
             type:String,
             required:[true, "User password is required field"]
-        }
-},{timestamps : true})
+        },
+        messages : [{ message:{ type: mongoose.Schema.Types.ObjectId  , ref:'chat'},
+         to:{type:mongoose.Schema.Types.ObjectId , ref:'user'},
+         from :{type:mongoose.Schema.Types.ObjectId , ref:'user'}
+        }]
+},{timestamps : true, suppressWarning: true})
 
-const userModel = mongoose.model('user', userSchema)
+const UserModel = mongoose.model('user', userSchema)
 
-module.exports = userModel
+module.exports = UserModel
